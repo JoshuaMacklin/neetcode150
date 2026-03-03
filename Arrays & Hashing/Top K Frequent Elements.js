@@ -5,17 +5,19 @@ class Solution {
      * @return {number[]}
      */
     topKFrequent(nums, k) {
-        let count = {};
-        for (let num of nums) {
-            count[num]=(count[num] || 0) + 1;
+        const freq = {};
+        // Creating Frequency Map
+        for (const n of nums) {
+            freq[n] = (freq[n] || 0) + 1;
         }
 
-        let array=Object.entries(count).map(([num, frequency]) => [
-            frequency,
-            num,
-        ]);
-        array.sort((a, b) => b[0] - a[0]);
+        //Turning Frequency map object into array
+        const entries = Object.entries(freq);
 
-        return array.slice(0, k).map((num) => num[1]);
+        // Sorting array by num frequency descending
+        entries.sort((a, b) => b[1] - a[1]);
+
+        //Returning the top k frequent elements
+        return entries.slice(0, k).map(pair => Number(pair[0]));
     }
 }
